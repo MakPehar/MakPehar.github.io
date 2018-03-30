@@ -1,0 +1,134 @@
+
+body{
+    background-color: #001C55;
+    color:#FFEDE1;
+}
+h1{
+    text-align:center;
+}
+.homecontainer{
+    width:500px;
+    margin:auto;
+}
+.nav-bar{
+    background-color: rgba(0, 2, 255, 0.38);
+    width:500px;
+    margin:auto;
+}
+.nav-element{
+    margin:auto;
+    color:#ACACDE;
+    background-color:#87F1FF;
+    width:20%;
+    border:2px solid #ACACDE;
+}
+.nav-element:hover{
+    color:#001C55;
+    background-color:#ACACDE;
+}
+#guess_display{
+    width:100px;
+    margin:auto;
+}
+#guess_form{
+    width:300px;
+    margin:auto;
+}
+body.maxwellpage{
+    margin:auto;
+}
+body.travelpage{
+    background:
+            linear-gradient(
+                    rgba(0, 2, 211, 0.38),
+                    rgba(0, 2, 211, 0.38)
+            ),
+            url("https://static.pexels.com/photos/8101/sea-sky-sunset-water.jpg");
+}
+
+.Titleone{
+    padding:0 0 0 75px;
+    color: #160085;
+}
+.hvarbeach{
+    width:60%;
+    border: 15px ridge #558ca4;
+}
+.hvartext{
+    color: #00ffa2;
+    background-color: rgb(0, 76, 176);
+    width: 60%;
+    box-shadow: #00ffa2 1px 1px 1px;
+    border-radius: 15px;
+    text-shadow: #160085 2px 2px 2px;
+    padding: 0 0 0 10px;
+}
+
+#container{
+    animation-name:fade;
+    animation-duration:3s;
+    animation-iteration-count:1;
+    animation-timing-function: ease-in;
+    background-color: rgba(123, 161, 229, 0.3);
+    border: 5px solid #160085;
+    border-radius: 30px;
+    margin:auto;
+    padding: 0 0 0 175px;
+    width:600px;
+    font-family: "Quattrocento Sans", "Arial"
+}
+#container:hover{
+    background-color: rgba(123, 161, 229, 0.6);
+}
+
+.list-text{
+    color: white;
+}
+body.inquirepage{
+    background-image: url("https://d2v9y0dukr6mq2.cloudfront.net/video/thumbnail/Esxjvv7/abstract-camp-fire-sparks-background-effect_ejystfvze__F0000.png");
+    background-size: cover;
+}
+#container2{
+    width:500px;
+    margin:auto;
+    text-align:center;
+}
+.butt:hover{
+    color:orangered;
+}
+.butt:active{
+    background-color: black;
+    color:white;
+    border-radius: 100px;
+}
+#back{
+    margin:0;
+    animation-name:change;
+    animation-duration:5s;
+    animation-iteration-count: infinite;
+    animation-direction: alternate;
+}
+.woah{
+    text-align:center;
+    margin:auto;
+    width:600px;
+    color: #e6e6e6;
+}
+/* Animations */
+
+@keyframes change {
+    from{
+        background-color: black;
+    }
+    to{
+        background-color: #231336;
+    }
+}
+@keyframes fade{
+    from{
+        opacity:0.0;
+    }
+    to{
+        opacity:1.0;
+    }
+}
