@@ -1,0 +1,123 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width">
+    <link type="text/css" rel="stylesheet" href="style.css">
+    <title>JS Bin</title>
+</head>
+<body>
+<div class="nav-bar">
+    <a class="nav-element" href="index.html">Home</a>
+    <a class="nav-element" href="travel.html">Hvar travel page</a>
+    <a class="nav-element" href="inquire.html">(WIP) Inquiring story</a>
+    <a class="nav-element" href="guesser.html">Word Guesser</a>
+    <a class="nav-element" href="tictactoe.html">Tic tac toe</a>
+    <a class="nav-element" href="madlibs.html">MadLibs</a>
+    <a class="nav-element" href="codingquiz.html">Coding quiz</a>
+</div>
+<br>
+<br>
+
+<h3 class="woah">Exciting Quiz Time!</h3>
+
+<form id="quiz-form">
+
+    <fieldset>
+        <legend>What language is this programmed in?</legend>
+        <label><input name="question1" value="javascript" type="radio">JavaScript</label><br>
+        <label><input name="question1" value="python" type="radio">Python</label><br>
+        <label><input name="question1" value="java" type="radio">Java</label><br>
+    </fieldset>
+
+    <fieldset>
+        <legend>Which of these is NOT a HTML tag?</legend>
+        <label><input name ="question2" value="progress" type="radio">progress</label><br>
+        <label><input name="question2" value="video" type="radio">video</label><br>
+        <label><input name="question2" value="footer" type="radio">footer</label><br>
+        <label><input name="question2" value="row" type="radio">row</label><br>
+    </fieldset>
+
+    <fieldset>
+        <legend>Which of these css properties would you use to bold something?</legend>
+        <label><input name="question3" value="fontweight" type="radio"> font-weight</label><br>
+        <label><input name="question3" value="fontstyle" type="radio"> font-style</label><br>
+        <label><input name="question3" value="fontfamily" type="radio"> font-family</label><br>
+        <label><input name="question3" value="fontvariant" type="radio"> font-variant</label><br>
+    </fieldset>
+    <fieldset>
+        <legend>What is the standard method of getting an element by it's id?</legend>
+        <label><input name="question4" value="jquery" type="radio"> $("#id")</label><br>
+        <label><input name="question4" value="elementid" type="radio">document.getElementById("id")</label><br>
+        <label><input name="question4" value="element" type="radio"> document.getElement("#id")</label><br>
+    </fieldset>
+    <button type="submit">Check me</button>
+</form>
+
+<div id="results"></div>
+
+<ol>
+    <li>Add another question</li>
+    <li>Add a score variable and output their total score</li>
+    <li>Bonus: add LOTS more questions</li>
+    <li>Bonus: make a really cool animation if they get 100%</li>
+    <li>Bonus: make it look way better with CSS</li>
+</ol>
+
+<script>
+
+    var quizForm = document.getElementById("quiz-form");
+    quizForm.addEventListener("submit", function(event) {
+        event.preventDefault();
+        var score = 0;
+        // resultsDiv is the div to display the results in
+        var resultsDiv = document.getElementById("results");
+
+        // answer1 stores whatever <input> element that they checked
+        //  or null if they didn't check any answer
+        var answer1 = document.querySelector('[name="question1"]:checked');
+        if (!answer1) {
+            resultsDiv.innerHTML = "You haven't filled an answer.";
+        } else {
+            // answer1.value is the value attribute of the checked <input>
+            if (answer1.value === "javascript") {
+                score += 1;
+            }
+        }
+        var answer2 = document.querySelector('[name="question2"]:checked');
+        if(!answer2) {
+            resultsDiv.innerHTML = "You haven't filled an answer."
+        } else {
+            if(answer2.value === "row"){
+                score+=1;
+            }
+        }
+        var answer3 = document.querySelector('[name="question3"]:checked');
+        if(!answer3) {
+            resultsDiv.innerHTML = "You haven't filled an answer.";
+        } else{
+            if(answer3.value === "fontweight"){
+                score+=1;
+            }
+        }
+        var answer4 = document.querySelector('[name="question4"]:checked');
+        if(!answer4) {
+            resultsDiv.innerHTML = "You haven't filled an answer.";
+        } else{
+            if(answer4.value === "elementid"){
+                score+=1;
+            }
+        }
+        if(score===4) {
+            resultsDiv.innerHTML = "You answered 4 out of 4 questions correctly! Good job!";
+            resultsDiv.style.animation="victory 4s infinite alternate";
+        } else {
+            resultsDiv.innerHTML = "You answered " + score + " out of 4 questions correctly.";
+            resultsDiv.style.animation = "default 4s infinite alternate";
+        }
+    });
+
+
+</script>
+</body>
+</html>

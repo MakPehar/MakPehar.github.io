@@ -133,3 +133,20 @@ body.inquirepage{
         opacity:1.0;
     }
 }
+@keyframes victory{
+    from{
+        color: #FFEDE1;
+    }
+    to{
+        font-size: 20px;
+        color: #00cac1;
+    }
+}
+@keyframes default{
+    from{
+        color: #FFEDE1;
+    }
+    to{
+        color: #FFEDE1;
+    }
+}
