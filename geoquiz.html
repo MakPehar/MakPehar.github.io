@@ -1,0 +1,97 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width">
+    <link type="text/css" rel="stylesheet" href="style.css">
+    <title>Geography Quiz</title>
+</head>
+<body>
+<div class="nav-bar">
+    <a class="nav-element" href="index.html">Home</a>
+    <a class="nav-element" href="travel.html">Hvar travel page</a>
+    <a class="nav-element" href="inquire.html">(WIP) Inquiring story</a>
+    <a class="nav-element" href="guesser.html">Word Guesser</a>
+    <a class="nav-element" href="tictactoe.html">Tic tac toe</a>
+    <a class="nav-element" href="madlibs.html">MadLibs</a>
+    <a class="nav-element" href="codingquiz.html">Coding quiz</a>
+    <a class="nav-element" href="geoquiz.html">Geography quiz</a>
+</div>
+
+<h1>Geography quiz</h1>
+<p>For each of the pictures, decide on which country it's located in</p>
+
+<form id="quiz-form">
+
+    <fieldset>
+        <img src="http://maps.google.com/maps/api/staticmap?center=44.5349185,18.6704591&zoom=12&maptype=terrain&size=300x300&key=AIzaSyBuJk0ZN3yMa6mM8lOX9-Qhn-x1QEfa6tY&sensor=false"
+             alt="Map of somewhere secret"> <br>
+        <label><input name="question1" value="nor" type="radio">Norway</label><br>
+        <label><input name="question1" value="srb" type="radio">Serbia</label><br>
+        <label><input name="question1" value="bih" type="radio">Bosnia and Herzegovina</label><br>
+    </fieldset>
+    <fieldset>
+        <img src="https://maps.googleapis.com/maps/api/streetview?size=500x500&location=48.854793,2.28919&heading=8.67&pitch=-0.92&fov=75&key=AIzaSyBuJk0ZN3yMa6mM8lOX9-Qhn-x1QEfa6tY"
+             alt="Streetview of something"> <br>
+        <label><input name="question2" value="ita" type="radio">Italy</label><br>
+        <label><input name="question2" value="spn" type="radio">Spain</label><br>
+        <label><input name="question2" value="frn" type="radio">France</label><br>
+        <label><input name="question2" value="ice" type="radio">Iceland</label><br>
+    </fieldset>
+    <fieldset>
+        <img src="http://maps.google.com/maps/api/staticmap?center=44.5349185,116.4077791&zoom=6&maptype=terrain&size=300x300&key=AIzaSyBuJk0ZN3yMa6mM8lOX9-Qhn-x1QEfa6tY&sensor=false"
+             alt="Map of somewhere secret"> <br>
+        <label><input name="question3" value="chi" type="radio">China</label><br>
+        <label><input name="question3" value="taj" type="radio">Tajikistan</label><br>
+        <label><input name="question3" value="aze" type="radio">Azerbaijan</label><br>
+        <label><input name="question3" value="mon" type="radio">Mongolia</label>
+    </fieldset>
+    <button type="submit">Check me</button>
+</form>
+<div id="results"></div>
+<script>
+    var quizForm = document.getElementById("quiz-form");
+    quizForm.addEventListener("submit", function (event) {
+        event.preventDefault();
+        var score = 0;
+        // resultsDiv is the div to display the results in
+        var resultsDiv = document.getElementById("results");
+
+        // answer1 stores whatever <input> element that they checked
+        //  or null if they didn't check any answer
+        var answer1 = document.querySelector('[name="question1"]:checked');
+        if (!answer1) {
+            resultsDiv.innerHTML = "You haven't filled an answer.";
+        } else {
+            // answer1.value is the value attribute of the checked <input>
+            if (answer1.value === "bih") {
+                score += 1;
+            }
+        }
+        var answer2 = document.querySelector('[name="question2"]:checked');
+        if (!answer2) {
+            resultsDiv.innerHTML = "You haven't filled an answer."
+        } else {
+            if (answer2.value === "frn") {
+                score += 1;
+            }
+        }
+        var answer3 = document.querySelector('[name="question3"]:checked');
+        if (!answer3) {
+            resultsDiv.innerHTML = "You haven't filled an answer.";
+        } else {
+            if (answer3.value === "mon") {
+                score += 1;
+            }
+        }
+        if (score === 3) {
+            resultsDiv.innerHTML = "You answered 3 out of 3 questions correctly! Good job!";
+            resultsDiv.style.animation = "victory 4s infinite alternate";
+        } else {
+            resultsDiv.innerHTML = "You answered " + score + " out of 3 questions correctly.";
+            resultsDiv.style.animation = "default 4s infinite alternate";
+        }
+    });
+</script>
+</body>
+</html>
