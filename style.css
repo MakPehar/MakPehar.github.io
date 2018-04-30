@@ -114,6 +114,16 @@ body.inquirepage{
     width:600px;
     color: #e6e6e6;
 }
+#virtcontainer{
+    width: 625px;
+    padding: 30px;
+    margin:auto;
+    border: 5px solid #e6e6e6;
+    border-radius: 100px;
+}
+.virtour{
+    text-align:center;
+}
 
 /* Animations */
 
