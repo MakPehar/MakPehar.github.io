@@ -12,7 +12,7 @@ h1{
 }
 .nav-bar{
     background-color: rgba(0, 2, 255, 0.38);
-    width:830px;
+    width:940px;
     margin:auto;
 }
 .nav-element{
@@ -125,6 +125,10 @@ body.inquirepage{
     text-align:center;
 }
 
+#map {
+    height: 300px;
+    width: 100%;
+}
 /* Animations */
 
 @keyframes change {

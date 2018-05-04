@@ -1,0 +1,115 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <link type="text/css" rel="stylesheet" href="style.css">
+    <title>Hometown Tour</title>
+</head>
+<body>
+<div class="nav-bar">
+    <a class="nav-element" href="index.html">Home</a>
+    <a class="nav-element" href="travel.html">Hvar travel page</a>
+    <a class="nav-element" href="inquire.html">(WIP) Inquiring story</a>
+    <a class="nav-element" href="guesser.html">Word Guesser</a>
+    <a class="nav-element" href="tictactoe.html">Tic tac toe</a>
+    <a class="nav-element" href="madlibs.html">MadLibs</a>
+    <a class="nav-element" href="codingquiz.html">Coding quiz</a>
+    <a class="nav-element" href="geoquiz.html">Geography quiz</a>
+    <a class="nav-element" href="virtualtour.html">Virtual Tour</a>
+    <a class="nav-element" href="hometour.html">Favorite places</a>
+</div>
+<h3 class = "virtour">My Favorite Places in Tuzla!</h3>
+<div id="map"></div> <br>
+<p>This is a showcase of my favorite places in my hometown of Tuzla.</p>
+
+    <script>
+        function initMap() {
+            var mapDiv = document.getElementById('map');
+            var opts = {
+                zoom: 14,
+                center: {lat: 44.536841, lng: 18.673422},
+                gestureHandling: 'greedy',
+                mapTypeId: google.maps.MapTypeId.HYBRID
+
+            };
+            var imageicon = "data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAACAAAAAgCAMAAABEpIrGAAAAbFBMVEX39vc/qfX29fbu7e7v7u/y8fLq8Pbq6epLrvWu1/YlY5CBxPWf0fbR5vZ5wfVEq/U8oOm93vYBBAVpteyLyPTU3OPj7fZxtunj4uSJvuRPrfDB0N3T4ezI1+Skx+J2uemaxudgtvSDv+ttvPVXPNCuAAABXElEQVQ4jYWT63rCIAyGYw4calus1sOcbrrd/z0OSqDqnq38aUleEpJ8wLbZrP5cm2YLTd2F3ncG0XS+D9XYQDnvWgMoTMSCYFpXYoD+rA2ytSxxpS+atToyEDxItCJMCyMr4MMMhAGIijsjRDCECvjkh6eFTOALsH7wI2qkFGOdAWfEZqP4b+fu4wUzIcZNQIvqP5y1IT4TFtsEBMM8Gcy5tmeKgcwmRKAHDRDx1e52S9iX5BDQR8CXDP6+2p0Eh8SR5vAR6IS1ANrv48kEHCcAWLoIGJa5P4hDmsJHNgmbCMRy5v4c+nTH40nLJnwBcBrim/oVeEgBEt3nd1vamlPUSyqwq369ZC0zpbhcr/v5zrnM2qhkGsfRz7vcqNrqkoKKn3Kr52G9AjqsNO4iB3HOfVIJUMadBMNFJdZa0d8qmEfJPQmqSm5ZtL9kTy+y//fhLD69xce79Px/AHWpDl9UiPTDAAAAAElFTkSuQmCC";
+            var map = new google.maps.Map(mapDiv, opts);
+            var marker1 = new google.maps.Marker({
+                position: {lat: 44.530978, lng: 18.689757},
+                map: map,
+                icon: imageicon
+            });
+
+            var marker2 = new google.maps.Marker({
+                position: {lat: 44.539636, lng: 18.680527},
+                map: map,
+                icon: imageicon
+            });
+
+            var marker3 = new google.maps.Marker({
+                position: {lat: 44.536694, lng: 18.681043},
+                map: map,
+                icon: imageicon
+            });
+            var marker4 = new google.maps.Marker({
+                position: {lat: 44.5321586, lng: 18.6936927},
+                map: map,
+                icon: imageicon
+            })
+            var marker5 = new google.maps.Marker({
+                position: {lat: 44.5332287, lng: 18.6522982},
+                map: map,
+                icon: imageicon
+            });
+            var info1 = new google.maps.InfoWindow({
+                content: '<strong> My neighborhood </strong>'
+            });
+            var info2 = new google.maps.InfoWindow({
+                content: '<strong>The Pannonic Salt Lakes!</strong> <br> ' +
+                '<img width="200px" src="http://www.sarajevotimes.com/wp-content/uploads/2015/06/Pannonica-Season-Started-kalesija.info_.jpg">'
+            });
+            var info3 = new google.maps.InfoWindow({
+                content: '<strong> My old high school. </strong>'
+            });
+            var info4 = new google.maps.InfoWindow({
+                content: '<strong> My old elementary/middle school. </strong>'
+            });
+            var info5 = new google.maps.InfoWindow({
+                content: '<strong>The best entertainment center in town. </strong> <br> <img width="200px" src="http://www.sarajevotimes.com/wp-content/uploads/2016/10/Bingo2-1024x576.jpg">'
+            });
+            marker1.addListener('click', function () {
+                info1.open(map, marker1);
+            });
+            marker2.addListener('click', function () {
+                info2.open(map, marker2);
+            });
+            marker3.addListener('click', function () {
+                info3.open(map, marker3);
+            });
+            marker4.addListener('click', function () {
+                info4.open(map, marker4);
+            });
+            marker5.addListener('click', function () {
+                info5.open(map, marker5);
+            });
+            var myCoordinates = [
+                new google.maps.LatLng(44.530978, 18.689757),
+                new google.maps.LatLng(44.539636, 18.680527),
+                new google.maps.LatLng(44.536694, 18.681043),
+                new google.maps.LatLng(44.5321586, 18.6936927),
+                new google.maps.LatLng(44.5332287, 18.6522982)
+            ];
+            var polyOptions = {
+                path: myCoordinates,
+                strokeColor: "#FF0000",
+                strokeOpacity: 0.3,
+                strokeWeight: 3
+            }
+            var it = new google.maps.Polyline(polyOptions);
+        }
+        it.setMap(map);
+    </script>
+    <script async defer
+            src="https://maps.googleapis.com/maps/api/js?key=AIzaSyBrSAqX0DuI-ZA3xrvnSZ_atK5GvXFelQQ&callback=initMap">
+    </script>
+</body>
+</html>
