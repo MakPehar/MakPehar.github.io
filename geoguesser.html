@@ -64,6 +64,7 @@
     var guessDiv = document.getElementById("guess");
     var scoreDiv = document.getElementById("score");
     var vctorymsg = document.getElementById("victory");
+    var button = document.getElementById("nextbutton");
     var userMarker;
     guessDiv.innerHTML = guesses + "/10 guesses left";
     scoreDiv.innerHTML = score + "/6 points";
@@ -115,6 +116,7 @@
                 displayNextPlace();
             } else{
                 vctorymsg.innerHTML = "This is the last map!"
+                button.parentNode.removeChild(button);
             }
         });
 
