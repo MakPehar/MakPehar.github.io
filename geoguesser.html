@@ -90,7 +90,7 @@
                 var distanceAway = Math.round(getDistance(e.latLng.toJSON(), places[placeNum]) / 1000);
                 if (distanceAway <= 500) {
                     score++;
-                    if(placeNum != places.length - 1) {
+                    if(placeNum < places.length - 1) {
                         placeNum++;
                         displayNextPlace();
                     } else if(score == 6){
@@ -110,8 +110,12 @@
         });
         var nextButton = document.getElementById("nextbutton");
         nextButton.addEventListener("click", function () {
-            placeNum++;
-            displayNextPlace();
+            if (placeNum < places.length-1) {
+                placeNum++;
+                displayNextPlace();
+            } else{
+                vctorymsg.innerHTML = "This is the last map!"
+            }
         });
 
         displayNextPlace();
