@@ -1,0 +1,196 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width">
+    <link href="style.css" rel="stylesheet" type="text/css">
+    <title>GeoGuesser</title>
+</head>
+<body>
+<div class="nav-bar">
+    <a class="nav-element" href="index.html">Home</a>
+    <a class="nav-element" href="travel.html">Hvar travel page</a>
+    <a class="nav-element" href="inquire.html">(WIP) Inquiring story</a>
+    <a class="nav-element" href="guesser.html">Word Guesser</a>
+    <a class="nav-element" href="tictactoe.html">Tic tac toe</a>
+    <a class="nav-element" href="madlibs.html">MadLibs</a>
+    <a class="nav-element" href="codingquiz.html">Coding quiz</a>
+    <a class="nav-element" href="geoquiz.html">Geography quiz</a>
+    <a class="nav-element" href="virtualtour.html">Virtual Tour</a>
+    <a class="nav-element" href="hometour.html">Favorite places</a>
+    <a class="nav-element" href="geoguesser.html">Geo guesser</a>
+    <a class="nav-element" href="imggifsearch.html">Image/Gif searcher</a>
+</div>
+<br>
+<br>
+<label>Your name: <input id="player" type="text"></label>
+<h2>Where is this place??</h2>
+<div id="secret"></div>
+<div id="map" style="width:500px; height: 300px;"></div>
+<div id="guess"></div>
+<div id="score"></div>
+<div id="results"></div>
+<div id="victory"></div>
+<button id="nextbutton">I'm ready to guess the next place!</button>
+<ol id="scores">
+    <img src="http://backgroundcheckall.com/wp-content/uploads/2017/12/loading-gif-transparent-background-6.gif" alt ="hey" width="200px">
+</ol>
+<script>
+
+    var places = [
+        {lat: 37.8852373, lng: -122.2634178},
+        {lat: 59.9269399, lng: 10.6984118},
+        {lat: -20.2497908, lng: 44.4172691},
+        {lat: 35.710067, lng: 139.8085117},
+        {lat: -22.951911, lng: -43.2126759},
+        {lat: -37.8176882, lng: 144.9681635}
+    ];
+    var placeNum = 0;
+    var guesses = 10;
+    var score = 0;
+    var resultsDiv = document.getElementById("results");
+    var guessDiv = document.getElementById("guess");
+    var scoreDiv = document.getElementById("score");
+    var vctorymsg = document.getElementById("victory");
+    var button = document.getElementById("nextbutton");
+    var player = document.getElementById("score").value;
+    var userMarker;
+    var scorevar = 9999999;
+    guessDiv.innerHTML = guesses + "/10 guesses left";
+    scoreDiv.innerHTML = score + "/6 points";
+
+    function onMapsAPILoad() {
+        var center = {lat: 0, lng: 0};
+        var map = new google.maps.Map(document.getElementById('map'), {
+            zoom: 1,
+            center: center
+        });
+        getScores();
+        map.addListener('click', function (e) {
+            if (guesses > 0) {
+                // Create or reposition marker
+                if (!userMarker) {
+                    userMarker = new google.maps.Marker({
+                        position: e.latLng,
+                        map: map
+                    });
+                } else {
+                    userMarker.setMap(map);
+                    userMarker.setPosition(e.latLng);
+                }
+                // Calculate distance from current secret
+                var distanceAway = Math.round(getDistance(e.latLng.toJSON(), places[placeNum]) / 1000);
+                if (distanceAway <= 500) {
+                    score++;
+                    if(placeNum < places.length - 1) {
+                        insertScore(player,distanceAway,guesses);
+                        placeNum++;
+                        displayNextPlace();
+                    } else if(score == 6){
+                        vctorymsg.innerHTML = "Good job! You got all of them correct!"
+                    }
+                    console.log("Hello");
+                } else {
+                    scorevar = Math.round(getDistance(e.latLng.toJSON(), places[placeNum]) / 1000);
+                    guesses--;
+                }
+                // Show results
+                resultsDiv.innerHTML = distanceAway + " kilometers away!";
+            } else {
+                insertScore(player, scorevar, guesses);
+                resultsDiv.innerHTML = "You've used up all of your guesses!";
+            }
+            player = document.getElementById("score").value;
+            guessDiv.innerHTML = guesses + "/10 guesses left";
+            scoreDiv.innerHTML = score + "/6 points";
+        });
+        var nextButton = document.getElementById("nextbutton");
+        nextButton.addEventListener("click", function () {
+            if (placeNum < places.length-1) {
+                placeNum++;
+                displayNextPlace();
+            } else{
+                vctorymsg.innerHTML = "This is the last map!"
+                button.parentNode.removeChild(button);
+            }
+        });
+
+        displayNextPlace();
+    }
+    ;
+
+    function displayNextPlace() {
+        guesses = 10;
+        var place = places[placeNum];
+        var img = document.createElement("img");
+        img.src = "http://maps.google.com/maps/api/staticmap?" +
+            "center=" + place.lat + "," + place.lng + "&" +
+            "zoom=16&" +
+            "maptype=satellite&" +
+            "size=300x300&" +
+            "key=AIzaSyBuJk0ZN3yMa6mM8lOX9-Qhn-x1QEfa6tY&" +
+            "sensor=false";
+        var secretDiv = document.getElementById("secret");
+        secretDiv.innerHTML = "";
+        secretDiv.appendChild(img);
+    };
+
+    // Distance calculation functions, very useful!
+    var rad = function (x) {
+        return x * Math.PI / 180;
+    };
+
+    var getDistance = function (p1, p2) {
+        var R = 6378137; // Earth’s mean radius in meter
+        var dLat = rad(p2.lat - p1.lat);
+        var dLong = rad(p2.lng - p1.lng);
+        var a = Math.sin(dLat / 2) * Math.sin(dLat / 2) +
+            Math.cos(rad(p1.lat)) * Math.cos(rad(p2.lat)) *
+            Math.sin(dLong / 2) * Math.sin(dLong / 2);
+        var c = 2 * Math.atan2(Math.sqrt(a), Math.sqrt(1 - a));
+        var d = R * c;
+        return d; // returns the distance in meter
+    };
+    function insertScore(player, score, guesses){
+        var url = '/scores/insert';
+
+        var request = new XMLHttpRequest();
+
+        request.addEventListener('load',function(){
+            if(this.status !== 200) {
+                alert('Error!!!')
+                console.log(this.response);
+            } else {
+                getScores();
+            }
+        });
+        request.open('POST',url,true);
+        request.setRequestHeader('Content-type', 'application/json');
+        var data = {'player':player,'score':score,'guesses':guesses};
+        request.send(JSON.stringify(data));
+    }
+    function getScores() {
+        var url='/scores/top20';
+
+        var request = new XMLHttpRequest();
+
+        request.addEventListener('load', function(){
+            var scores = JSON.parse(this.responseText);
+            console.log(scores);
+            var scoresDiv = document.getElementById('scores');
+            scoresDiv.innerHTML = ' ';
+            for(var i = 0; i < scores.length; i++){
+                scoresDiv.innerHTML += '<li>'+scores[i].player + ':'+scores[i].score+'meters, ' + scores[i].guesses;
+            }
+        });
+        request.open('GET',url,true);
+        request.setRequestHeader('Content-type', 'application/json');
+        request.send();
+    }
+
+</script>
+<script async defer
+        src="https://maps.googleapis.com/maps/api/js?key=AIzaSyBuJk0ZN3yMa6mM8lOX9-Qhn-x1QEfa6tY&callback=onMapsAPILoad">
+</script>
+</body>
+</html>
